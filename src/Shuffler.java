@@ -1,4 +1,4 @@
-import java.lang.Math.Random;
+import java.util.Random;
 /**
  * This class provides a convenient way to test shuffling methods.
  */
@@ -8,7 +8,7 @@ public class Shuffler {
    * The number of consecutive shuffle steps to be performed in each call
    * to each sorting procedure.
    */
-  private static final int SHUFFLE_COUNT = 1;
+  private static final int SHUFFLE_COUNT = 10;
   
   
   /**
@@ -52,23 +52,17 @@ public class Shuffler {
    */
   public static void perfectShuffle(int[] values) {
     /* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
-    /*int[]left=Arrays.copyOfRange(values,0,values.length/2);
-    int[]right=Arrays.copyOfRange(values,values.length/2,values.length);*/
-    int[]left=new int[values.length/2];
-    int[]right=new int[values.length/2];
-    for(int i=0;i<values.length/2;i++){
-      left[i]=values[i];
+    int[]shuffled=new int[values.length];
+    int k=0;
+    for(int j=0;j<values.length/2;j++,k+=2){
+      shuffled[k]=values[j];
     }
-    for(int i=0,j=values.length/2;i<values.length/2;i++,j++){
-      right[i]=values[j];
+    k=1;
+    for(int j=values.length/2;j<values.length;j++,k+=2){
+      shuffled[k]=values[j];
     }
-    for(int i=0;i<values.length/2;i++){
-      if(i%2==0)
-        values[i]=left[i];
-    }
-    for(int i=0;i<values.length/2;i++){
-      if(i%2==1)
-        values[i]=right[i];
+    for(int i=0;i<values.length;i++){
+      values[i]=shuffled[i];
     }
   }
   
@@ -87,8 +81,14 @@ public class Shuffler {
     /* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
     int[]shuffled=new int[values.length];
     for(int i=0;i<values.length;i++){
-      while(shuffeled[i]!=null){
-        Random random=new Random(0,52);
-        if(values[random
+      Random random=new Random();
+      int r=random.nextInt(values.length);
+      int temp=values[i];
+      values[i]=values[r];
+      shuffled[r]=temp;
+    }
+    for(int i=0;i<values.length;i++){
+      values[i]=shuffled[i];
+    }
   }
 }
